@@ -1,0 +1,30 @@
+{
+    "author": "levidos",
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "description": "Extension that opens the LeetCode Daily Challenge page at Firefox start-up. Icon becomes grey once a challenge has been completed that day.",
+    "icons": {
+        "128": "icons/icon-48-fire.png"
+    },
+    "browser_action": {
+        "default_area": "navbar"
+    },
+    "manifest_version": 2,
+    "name": "LeetCode Daily Badger",
+    "permissions": [
+        "cookies",
+        "*://leetcode.com/*"
+    ],
+    "host_permissions": [
+        "*://*.leetcode.com/*"
+    ],
+    "version": "0.1.0",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{7838cdc4-91a5-4623-ac1c-02d47b21f4fb}"
+        }
+    }
+}
