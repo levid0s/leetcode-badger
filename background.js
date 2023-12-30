@@ -108,15 +108,14 @@ function getLeetCodeSubmissionCount(username, cacheLifetimeSec = 600) {
             console.debug("Retrieved user details from API:", data);
             const submissionCalendar = data.submissionCalendar;
 
-            // Get today's date in Unix timestamp (seconds since Epoch)
-            const today = Math.floor(new Date().getTime() / 1000);
+            // Get today's date at midnight in Unix timestamp (seconds since Epoch)
+            let today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const epochAtMidnight = Math.floor(today.getTime() / 1000);
 
-            // Find the closest date to today in the submissionCalendar
-            const closestDate = Object.keys(submissionCalendar)
-                .reduce((a, b) => Math.abs(b - today) < Math.abs(a - today) ? b : a);
-
-            const submissionCount = submissionCalendar[closestDate] || 0;
-            console.debug("Retrieved submission count from API:", submissionCount);
+            // Check if there are submissions for today's date
+            const submissionCount = submissionCalendar.hasOwnProperty(epochAtMidnight) ? submissionCalendar[epochAtMidnight] : 0;
+            console.debug("Retrieved submission count for today:", submissionCount);
 
             // Update cache
             submissionCountCache = {
